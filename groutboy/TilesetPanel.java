@@ -1,9 +1,9 @@
 package groutboy;
 
-/** class: GBTileSet
+/** class: TilesetPanel
  *  author: Cameron Scoggins
  *	date: June 23, 2021
- *	purpose: Rewrite of original.  Provides implementation for the display panel for a tileset.
+ *	purpose: Provides a Swing display panel for the tileset
  */
 
 import javax.swing.JPanel;
@@ -20,6 +20,8 @@ import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 
 class TilesetPanel extends JPanel implements DrawListener, DrawNotifier{
+	private static final long serialVersionUID = 0x13;
+	
 	private ArrayList<DrawListener> listeners;
 	private GBTileSet tileset;
 	private Palette pal;

@@ -6,6 +6,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
 public class Coordinator extends JFrame implements DrawListener{
+	private static final long serialVersionUID = 0x14;
+	
 	private PalettePanel palpane;
 	private DrawPanel drawpane;
 	private TilesetPanel tilespane;
@@ -51,7 +53,7 @@ public class Coordinator extends JFrame implements DrawListener{
 		
 		gbc.gridx = 0;
 		gbc.gridy = 5;
-		gbc.gridwidth = 1;
+		gbc.gridwidth = 1; 
 		gbc.gridheight = 4;
 		this.add(palpane, gbc);
 		

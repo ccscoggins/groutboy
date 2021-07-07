@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 public class PalettePanel extends JPanel implements DrawNotifier{
+	private static final long serialVersionUID = 0x11;
+	
 	private ArrayList<DrawListener> listeners;
 	private ArrayList<Palette> pal;
 	private JButton forward;
@@ -33,6 +35,7 @@ public class PalettePanel extends JPanel implements DrawNotifier{
 	int palInnerIndex; //0-3, index of active color in palette
 	
 	private class DrawPanel extends JPanel{
+		private static final long serialVersionUID = 0x12;
 		private double sizey, sizex;
 		private class PaletteMouseControl extends MouseAdapter{
 			public void mousePressed(MouseEvent me){

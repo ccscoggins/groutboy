@@ -15,6 +15,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.geom.Rectangle2D;
 
 class DrawPanel extends JPanel implements DrawNotifier{
+	private static final long serialVersionUID = 0x10;
+	
 	private ArrayList<DrawListener> listeners;
 	double pixelSize, yoffset, xoffset;
 	private int sizey, sizex;
@@ -77,7 +79,7 @@ class DrawPanel extends JPanel implements DrawNotifier{
 			y >= sizey + yoffset){
 			return -1;
 		}
-		int ret = (int)((((int)(y - yoffset) / (int)pixelSize) * 8) +
+		int ret = ((((int)(y - yoffset) / (int)pixelSize) * 8) +
 						((int)(x - xoffset) / (int)pixelSize));
 		if(ret >= 64)
 			return -1;
