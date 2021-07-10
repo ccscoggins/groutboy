@@ -6,9 +6,9 @@ package groutboy;
  *	purpose: Rewrite of original.  Provides implementation for single 8x8 pixel tile
  */
 
-import java.util.StringReader;
-
+import java.lang.StringBuffer;
 import java.io.IOException;
+import java.io.StringReader;
 
 public class GBTile{
 	private int [] pixel;
@@ -25,18 +25,24 @@ public class GBTile{
 	 */
 	public GBTile(String hexString){
 		StringReader hexInput = new StringReader(hexString);
+		StringBuffer hexValue = new StringBuffer();
 		pixel = new int[64];
 		short currByte;
 		for(int i=0; i<16; i++){
 			try{
-				currByte = hexInput.read();
+				//get two chars
+				hexValue.append((char)hexInput.read());
+				hexValue.append((char)hexInput.read());
+				currByte = (short)Integer.parseInt(hexValue.toString(), 16);
+				hexValue.delete(0, hexValue.length());
+				for(int j=0; j<4; j++){
+					pixel[i*4+j] = currByte & 0x03;
+					currByte >>= 2;
+				}
 			} catch (IOException E){
 				System.err.println("Exception occurred on reading tile from hex data.");
 				E.printStackTrace();
-			}
-			for(int j=0; j<4; j++){
-				pixel[i*4+j] = currByte & 0x03;
-				currByte >> 2;
+				break;
 			}
 		}
 	}
@@ -77,10 +83,10 @@ public class GBTile{
 		StringBuffer buf = new StringBuffer();
 		for(int i=0; i<16; i++){
 			for(int j=0; j<4; j++){
-				currByte << 2;
+				currByte <<= 2;
 				currByte |= pixel[i*4 + j];
 			}
-			buf.append(String.toHexString(currByte & 0xFF)); //and is failsafe in case numbers got weird.
+			buf.append(Integer.toHexString(currByte & 0xFF)); //and is failsafe in case numbers got weird.
 			currByte = 0;
 		}
 		return buf.toString();
